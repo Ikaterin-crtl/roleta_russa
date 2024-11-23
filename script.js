@@ -103,6 +103,11 @@ function completeTask() {
   taskItem.textContent = completedTask.tarefa;
   concluidasList.appendChild(taskItem);
 
+  // Exibe o GIF de "Good Job" de forma engraçada
+  const gifContainer = document.createElement("div");
+  gifContainer.innerHTML = `<img src="https://media.giphy.com/media/10d1wLV1g8zq6g/giphy.gif" alt="Good Job!" class="good-job-gif" />`;
+  concluidasList.appendChild(gifContainer);
+
   // Salva a missão concluída no LocalStorage
   saveProgress();
 
