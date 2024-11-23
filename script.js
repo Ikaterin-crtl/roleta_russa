@@ -37,26 +37,63 @@ const tarefas = [
   }
 ];
 
+// Recupera as missões concluídas e a carta atual do LocalStorage
+const loadProgress = () => {
+  const concluidas = JSON.parse(localStorage.getItem('concluidas')) || [];
+  const tarefaAtualIndex = localStorage.getItem('tarefaAtualIndex');
+
+  // Exibe as missões concluídas
+  concluidas.forEach(tarefa => {
+    const taskItem = document.createElement("div");
+    taskItem.textContent = tarefa;
+    concluidasList.appendChild(taskItem);
+  });
+
+  // Se há uma carta atualmente selecionada, exibe a missão na carta
+  if (tarefaAtualIndex) {
+    const selectedTask = tarefas[tarefaAtualIndex];
+    missionText.textContent = selectedTask.tarefa;
+    modalTitle.textContent = selectedTask.tarefa;
+    modalDetails.textContent = selectedTask.detalhes;
+    completeTaskBtn.dataset.index = tarefaAtualIndex;
+    cardBack.style.transform = "rotateY(180deg)";
+    selectedCard.classList.remove("hidden");
+  }
+};
+
+// Salva as missões concluídas no LocalStorage
+const saveProgress = () => {
+  const concluidas = [];
+  document.querySelectorAll("#concluidas-list div").forEach(item => {
+    concluidas.push(item.textContent);
+  });
+  localStorage.setItem('concluidas', JSON.stringify(concluidas));
+};
+
+// Revela a próxima carta de missão
 function revealCard() {
   if (!selectedCard.classList.contains("hidden")) return;
 
+  // Evita que o mesmo índice seja usado novamente
   const randomIndex = Math.floor(Math.random() * tarefas.length);
-  const selectedTask = tarefas[randomIndex];
 
   cardBack.style.transform = "rotateY(180deg)";
   selectedCard.classList.remove("hidden");
-  missionText.textContent = selectedTask.tarefa;
+  missionText.textContent = tarefas[randomIndex].tarefa;
 
   // Atualiza os detalhes da tarefa no modal
-  modalTitle.textContent = selectedTask.tarefa;
-  modalDetails.textContent = selectedTask.detalhes;
+  modalTitle.textContent = tarefas[randomIndex].tarefa;
+  modalDetails.textContent = tarefas[randomIndex].detalhes;
 
   // Salva índice para conclusão posterior
   completeTaskBtn.dataset.index = randomIndex;
 
+  // Salva a carta atual no LocalStorage
+  localStorage.setItem('tarefaAtualIndex', randomIndex);
   detailsModal.classList.add("show");
 }
 
+// Conclui a tarefa e move para as concluídas
 function completeTask() {
   const index = parseInt(completeTaskBtn.dataset.index, 10);
   const completedTask = tarefas.splice(index, 1)[0];
@@ -66,18 +103,28 @@ function completeTask() {
   taskItem.textContent = completedTask.tarefa;
   concluidasList.appendChild(taskItem);
 
+  // Salva a missão concluída no LocalStorage
+  saveProgress();
+
   // Fecha o modal e reseta a carta
   detailsModal.classList.remove("show");
   resetCard();
 }
 
+// Reseta a carta e esconde
 function resetCard() {
   cardBack.style.transform = "rotateY(0deg)";
   selectedCard.classList.add("hidden");
   missionText.textContent = "";
+
+  // Remove a carta atual do LocalStorage
+  localStorage.removeItem('tarefaAtualIndex');
 }
 
 revealBtn.addEventListener("click", revealCard);
 closeDetailsBtn.addEventListener("click", () => detailsModal.classList.remove("show"));
 closeModalIcon.addEventListener("click", () => detailsModal.classList.remove("show"));
 completeTaskBtn.addEventListener("click", completeTask);
+
+// Carrega o progresso quando a página for carregada
+window.addEventListener("load", loadProgress);
