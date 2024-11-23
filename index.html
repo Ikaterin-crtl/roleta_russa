@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarô das Missões</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🌙 Tarô das Missões 🌌</h1>
+    <div class="tarot-board">
+      <div class="card-stack">
+        <div class="tarot-card" id="card-back"></div>
+        <div class="tarot-card hidden" id="selected-card">
+          <p id="mission-text"></p>
+        </div>
+      </div>
+    </div>
+    <button id="reveal-btn">Revelar a Carta</button>
+    <div class="concluidas">
+      <h2>Cartas Concluídas</h2>
+      <div id="concluidas-list"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Detalhes -->
+  <div id="details-modal" class="hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-details"></p>
+      <button id="complete-task-btn">Concluir Tarefa</button>
+      <button id="close-details-btn">Fechar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #111;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.tarot-board {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  background: #6a1b9a;
+  border-radius: 10px;
+  color: #fff;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #9c27b0;
+}
+
+#details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+#details-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: #1b0036;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  text-align: center;
+  max-width: 500px;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+  color: #d1a3ff;
+}
+
+.modal-content p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+button#close-details-btn {
+  background: linear-gradient(90deg, #6a1b9a, #7e57c2);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button#complete-task-btn {
+  background: #4caf50;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+button#complete-task-btn:hover {
+  background: #388e3c;
+}
+
+#concluidas-list {
+  margin-top: 20px;
+}
+
+#concluidas-list div {
+  background: #444;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsividade geral */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  #details-modal .modal-content {
+    padding: 10px;
+  }
+}
