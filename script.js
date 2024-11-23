@@ -30,10 +30,6 @@ const tarefas = [
   {
     tarefa: "Arrumar baú da cama",
     detalhes: "Retire todos os itens do baú. Organize roupas ou objetos por categoria antes de recolocá-los de forma ordenada."
-  },
-  {
-    tarefa: "Trocar torneiras",
-    detalhes: "Desligue o registro de água. Desrosqueie a torneira antiga e coloque a nova com fita veda-rosca. Aperte bem para evitar vazamentos."
   }
 ];
 
